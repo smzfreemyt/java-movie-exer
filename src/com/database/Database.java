@@ -3,9 +3,9 @@ package com.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * June 4, 2021
@@ -18,6 +18,9 @@ public class Database{
     private final String dbPass = "";
     protected Connection conn;
 
+    /**
+     * Constructor
+     */
     public Database() {
         try {
             Class.forName(this.driver);
@@ -27,11 +30,19 @@ public class Database{
         }
     }
 
-    public void insert(String table, String[] fields, Map<Integer, Object> values)
+    /**
+     * Insert into Table
+     * @param table
+     * @param fields
+     * @param values
+     */
+    public void insert(String table, ArrayList<String> fields, Map<Integer, Object> values)
     {
         try {
-            PreparedStatement query = this.conn.prepareStatement("INSERT INTO " + table +"(`title`,`details`,`favorite`)" +
-                    "VALUES(?, ?, ?)");
+            Table tbl = new Table(fields, values);
+            PreparedStatement query = this.conn.prepareStatement("INSERT INTO " + table +
+                    "("+ tbl.getFields() + ")" +
+                    "VALUES(" + tbl.getValuesUnknown() + ")");
             for (Integer i: values.keySet()) {
                 query.setObject(i, values.get(i));
             }
