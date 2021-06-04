@@ -35,13 +35,18 @@ public class Table {
         this.tblname = name;
     }
 
-
+    /**
+     * @return field1, field2, field3
+     */
     public String getFields() {
         return this.fields.stream()
                 .map(Objects::toString)
                 .collect(Collectors.joining(","));
     }
 
+    /**
+     * @return ?,?,?
+     */
     public String getValuesUnknown() {
         String result = "";
         for (String i: this.fields) {
