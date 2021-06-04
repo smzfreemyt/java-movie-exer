@@ -1,3 +1,5 @@
+import com.database.Database;
+
 /**
  * Main class
  * June 4, 2021
@@ -9,5 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         new Window(WIN_WIDTH, WIN_HEIGHT, "Movie Database Exercise");
+        Database db = new Database();
+        db.create();
     }
 }
