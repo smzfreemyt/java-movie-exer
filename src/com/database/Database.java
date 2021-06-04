@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,10 +11,11 @@ import java.util.Map;
  * @author Samuel Amador
  */
 public class Database{
-    private final String dbConn = "jdbc:mysql://localhost:3306/moviedb";
-    private final String driver = "com.mysql.jdbc.Driver";
-    private final String dbName = "root";
-    private final String dbPass = "";
+    private static final String driver = "com.mysql.jdbc.Driver";
+    private static final String dbName = "moviedb";
+    private static final String dbUser = "root";
+    private static final String dbPass = "";
+    private final String dbConn = "jdbc:mysql://localhost:3306/" + dbName;
     protected Connection conn;
 
     /**
@@ -23,8 +23,8 @@ public class Database{
      */
     public Database() {
         try {
-            Class.forName(this.driver);
-            this.conn = DriverManager.getConnection(this.dbConn, this.dbName, this.dbPass);
+            Class.forName(driver);
+            this.conn = DriverManager.getConnection(this.dbConn, dbUser, dbPass);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
