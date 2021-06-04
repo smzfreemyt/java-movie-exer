@@ -6,6 +6,8 @@ import java.awt.*;
 public class App  extends JFrame {
     private JButton submitButton;
     private JPanel panelMain;
+    private JTextField textField1;
+    private JLabel labelSearch;
 
     public App(String title) {
         super(title);
