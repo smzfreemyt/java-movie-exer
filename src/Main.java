@@ -13,16 +13,8 @@ public class Main {
     public static void main(String[] args) {
 
         Movie movie = new Movie();
-
         System.out.println(movie.search());
 
-        System.out.println("Running...");
-        JFrame frame = new JFrame("Movie Exercise in Java By Sam");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new App().getPanelMain());
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setBounds(30, 30, 600, 500);
-        frame.setVisible(true);
+        new App("Welcome to my App by Samuel");
     }
 }

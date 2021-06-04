@@ -1,23 +1,23 @@
 package com.guiform;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 
-public class App {
+public class App  extends JFrame {
     private JButton submitButton;
     private JPanel panelMain;
 
-    public App() {
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "wow");
-            }
-        });
+    public App(String title) {
+        super(title);
+        this.initialize();
     }
 
-    public JPanel getPanelMain() {
-        return panelMain;
+    public void initialize() {
+        this.setContentPane(panelMain);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setPreferredSize(new Dimension(600, 300));
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 }
