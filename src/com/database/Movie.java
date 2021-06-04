@@ -10,14 +10,14 @@ import java.util.Map;
  */
 public class Movie extends Database{
 
-    protected final String tableName = "movies";
+    protected final String TABLE_NAME = "movies";
 
     private final ArrayList<String>  fields = new ArrayList<>(
             Arrays.asList("title", "details", "favorite")
     );
 
     public Movie() {
-        this.currentTable = tableName;
+        this.currentTable = TABLE_NAME;
     }
 
     public void create(){

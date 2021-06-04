@@ -9,11 +9,11 @@ import java.util.Map;
  * @author Samuel Amador
  */
 abstract public class Database {
-    private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String dbName = "moviedb";
-    private static final String dbUser = "root";
-    private static final String dbPass = "";
-    private final String dbConn = "jdbc:mysql://localhost:3306/" + dbName;
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DB_NAME = "moviedb";
+    private static final String DB_USER = "root";
+    private static final String DB_PASS = "";
+    private static final String DB_CONN = "jdbc:mysql://localhost:3306/" + DB_NAME;
     private PreparedStatement query;
 
     protected Connection conn;
@@ -25,8 +25,8 @@ abstract public class Database {
      */
     public Database() {
         try {
-            Class.forName(driver);
-            this.conn = DriverManager.getConnection(this.dbConn, dbUser, dbPass);
+            Class.forName(DRIVER);
+            this.conn = DriverManager.getConnection(DB_CONN, DB_USER, DB_PASS);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -74,6 +74,8 @@ abstract public class Database {
                 }
                 resultList.add(obj);
             }
+            result.close();
+            query.close();
             return resultList;
         } catch (Exception e) {
             System.out.println("Error : " + e);

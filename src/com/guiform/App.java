@@ -10,7 +10,7 @@ public class App  extends JFrame {
     private JPanel panelMain;
     private JTextField textSearchInput;
     private JLabel labelSearch;
-    private JList list1;
+    private JList listSearch;
 
     public App(String title) {
         super(title);
@@ -18,6 +18,11 @@ public class App  extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                DefaultListModel model = new DefaultListModel();
+                listSearch = new JList();
+                model.addElement("woww");
+                listSearch.setModel(model);
+
                 System.out.println(textSearchInput.getText());
             }
         });
