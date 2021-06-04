@@ -1,4 +1,10 @@
 import com.database.Database;
+import com.database.Movie;
+import com.guiform.App;
+
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Main class
@@ -8,8 +14,17 @@ import com.database.Database;
 public class Main {
 
     public static void main(String[] args) {
-        new GuiClass();
-        Database db = new Database();
-//        db.create();
+
+        Movie movie = new Movie();
+        movie.create();
+
+//        System.out.println("Running...");
+//        JFrame frame = new JFrame("Movie Exercise in Java By Sam");
+//        frame.setContentPane(new App().getPanelMain());
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//        frame.setLocationRelativeTo(null);
+//        frame.setBounds(30, 30, 600, 500);
+//        frame.setVisible(true);
     }
 }
