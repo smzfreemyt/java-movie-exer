@@ -6,12 +6,10 @@ import com.database.Database;
  * @author Samuel Amador
  */
 public class Main {
-    private static final int WIN_WIDTH = 600;
-    private static final int WIN_HEIGHT = 500;
 
     public static void main(String[] args) {
-        new Window(WIN_WIDTH, WIN_HEIGHT, "Movie Database Exercise");
+        new GuiClass();
         Database db = new Database();
-        db.create();
+//        db.create();
     }
 }

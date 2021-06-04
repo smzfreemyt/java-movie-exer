@@ -37,5 +37,4 @@ public class Database {
             System.out.println("Error Insert : " + e);
         }
     }
-
 }
