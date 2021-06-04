@@ -1,10 +1,7 @@
-import com.database.Database;
 import com.database.Movie;
 import com.guiform.App;
 
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Main class
@@ -19,13 +16,13 @@ public class Main {
 
         System.out.println(movie.search());
 
-//        System.out.println("Running...");
-//        JFrame frame = new JFrame("Movie Exercise in Java By Sam");
-//        frame.setContentPane(new App().getPanelMain());
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setLocationRelativeTo(null);
-//        frame.setBounds(30, 30, 600, 500);
-//        frame.setVisible(true);
+        System.out.println("Running...");
+        JFrame frame = new JFrame("Movie Exercise in Java By Sam");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(new App().getPanelMain());
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setBounds(30, 30, 600, 500);
+        frame.setVisible(true);
     }
 }
