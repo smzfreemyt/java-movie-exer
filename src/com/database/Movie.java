@@ -10,9 +10,15 @@ import java.util.Map;
  */
 public class Movie extends Database{
 
+    protected final String tableName = "movies";
+
     private final ArrayList<String>  fields = new ArrayList<>(
             Arrays.asList("title", "details", "favorite")
     );
+
+    public Movie() {
+        this.currentTable = tableName;
+    }
 
     public void create(){
         Map<Integer, Object> values = new HashMap<>();
@@ -21,4 +27,5 @@ public class Movie extends Database{
         values.put(3, 1);
         this.insert("movies", this.fields, values);
     }
+
 }

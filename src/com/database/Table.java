@@ -54,5 +54,4 @@ public class Table {
         }
         return result.substring(0, result.length() - 1);
     }
-
 }

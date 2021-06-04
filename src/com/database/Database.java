@@ -1,8 +1,6 @@
 package com.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -10,13 +8,16 @@ import java.util.Map;
  * June 4, 2021
  * @author Samuel Amador
  */
-public class Database{
+abstract public class Database{
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String dbName = "moviedb";
     private static final String dbUser = "root";
     private static final String dbPass = "";
     private final String dbConn = "jdbc:mysql://localhost:3306/" + dbName;
+    private PreparedStatement query;
+
     protected Connection conn;
+    protected String currentTable;
 
     /**
      * Constructor
@@ -40,7 +41,7 @@ public class Database{
     {
         try {
             Table tbl = new Table(fields, values);
-            PreparedStatement query = this.conn.prepareStatement("INSERT INTO " + table +
+            query = this.conn.prepareStatement("INSERT INTO " + table +
                     "("+ tbl.getFields() + ")" +
                     "VALUES(" + tbl.getValuesUnknown() + ")");
             for (Integer i: values.keySet()) {
@@ -53,4 +54,22 @@ public class Database{
         }
     }
 
+
+    public ResultSet getAll() {
+        try {
+            query = this.conn.prepareStatement("select * from " + this.currentTable);
+            ResultSet result = query.executeQuery();
+            ResultSetMetaData meta = result.getMetaData();
+            int totalColumn = meta.getColumnCount();
+            while(result.next()) {
+                for (int x = 1; x < totalColumn; x++) {
+                    System.out.print(result.getObject(x));
+                }
+                System.out.println(" ----- ");
+            }
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
+        return null;
+    }
 }
