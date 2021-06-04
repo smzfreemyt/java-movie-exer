@@ -8,7 +8,7 @@ import java.util.Map;
  * June 4, 2021
  * @author Samuel Amador
  */
-abstract public class Database{
+abstract public class Database {
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String dbName = "moviedb";
     private static final String dbUser = "root";
@@ -16,6 +16,7 @@ abstract public class Database{
     private final String dbConn = "jdbc:mysql://localhost:3306/" + dbName;
     private PreparedStatement query;
 
+    protected Table tableClass;
     protected Connection conn;
     protected String currentTable;
 
@@ -25,6 +26,7 @@ abstract public class Database{
     public Database() {
         try {
             Class.forName(driver);
+            this.tableClass = new Table();
             this.conn = DriverManager.getConnection(this.dbConn, dbUser, dbPass);
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -61,7 +63,8 @@ abstract public class Database{
     public ArrayList<Object> getAll() {
         try {
             ArrayList<Object> resultList = new ArrayList<>();
-            query = this.conn.prepareStatement("select * from " + this.currentTable);
+            query = this.conn.prepareStatement("select * from " +
+                    this.currentTable + this.tableClass.getWhere());
             ResultSet result = query.executeQuery();
             ResultSetMetaData meta = result.getMetaData();
             int totalColumn = meta.getColumnCount();

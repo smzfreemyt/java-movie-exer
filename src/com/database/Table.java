@@ -12,27 +12,21 @@ public class Table {
 
     private ArrayList<String> fields;
     private Map<Integer, Object> values;
-    private String tblname;
+    private String name;
+    private String whereStr = "";
+
+    /**
+     * Empty constructor
+     */
+    public Table() {}
 
     /**
      * @param fields
-     * @param values
+     * @param val
      */
-    public Table(ArrayList<String> fields, Map<Integer, Object> values) {
+    public Table(ArrayList<String> fields, Map<Integer, Object> val) {
         this.fields = fields;
-        this.values = values;
-    }
-
-    /**
-     * Overload with table name
-     * @param fields
-     * @param values
-     * @param name
-     */
-    public Table(ArrayList<String> fields, Map<Integer, Object> values, String name) {
-        this.fields = fields;
-        this.values = values;
-        this.tblname = name;
+        this.values = val;
     }
 
     /**
@@ -54,4 +48,21 @@ public class Table {
         }
         return result.substring(0, result.length() - 1);
     }
+
+    /**
+     * Can do where chaining. No security added YET. Will do later when there is time.
+     * @return
+     */
+    public Table where(String field, String operator, Object value) {
+        this.whereStr += field + operator + value;
+        return this;
+    }
+
+    public String getWhere() {
+        if (this.whereStr != null) {
+            return " where " + this.whereStr;
+        }
+        return "";
+    }
+
 }

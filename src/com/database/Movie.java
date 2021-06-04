@@ -28,4 +28,8 @@ public class Movie extends Database{
         this.insert("movies", this.fields, values);
     }
 
+    public ArrayList<Object> search() {
+        this.tableClass.where("id", "=", 10);
+        return this.getAll();
+    }
 }

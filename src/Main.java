@@ -17,7 +17,7 @@ public class Main {
 
         Movie movie = new Movie();
 
-        System.out.println(movie.getAll());
+        System.out.println(movie.search());
 
 //        System.out.println("Running...");
 //        JFrame frame = new JFrame("Movie Exercise in Java By Sam");
