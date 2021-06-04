@@ -12,7 +12,7 @@ public class Table {
 
     private ArrayList<String> fields;
     private Map<Integer, Object> values;
-    private String name;
+    private String name = "";
     private String whereStr = "";
 
     /**
