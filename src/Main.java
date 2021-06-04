@@ -12,9 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Movie movie = new Movie();
-        System.out.println(movie.search());
-
-        new App("Welcome to my App by Samuel");
+        // start an app
+        App app = new App("Welcome to my App by Samuel");
+        app.start();
     }
 }

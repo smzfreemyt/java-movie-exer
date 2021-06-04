@@ -78,7 +78,7 @@ abstract public class Database {
             query.close();
             return resultList;
         } catch (Exception e) {
-            System.out.println("Error : " + e);
+            System.out.println("Error : " + e.getMessage());
         }
         return null;
     }

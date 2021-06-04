@@ -59,7 +59,7 @@ public class Table {
     }
 
     public String getWhere() {
-        if (this.whereStr != null) {
+        if (!this.whereStr.isEmpty()) {
             return " where " + this.whereStr;
         }
         return "";

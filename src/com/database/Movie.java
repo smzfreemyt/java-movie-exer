@@ -29,7 +29,7 @@ public class Movie extends Database{
     }
 
     public ArrayList<Object> search() {
-        this.tableClass.where("id", "=", 10);
+        this.tableClass.where("id", "=", 2);
         return this.getAll();
     }
 }
