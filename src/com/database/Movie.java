@@ -1,5 +1,6 @@
 package com.database;
 
+import java.sql.ResultSet;
 import java.util.*;
 
 /**
@@ -8,31 +9,12 @@ import java.util.*;
 public class Movie extends Database{
 
     protected final String TABLE_NAME = "movies";
-    private int id;
-    private String title;
-
     private final ArrayList<String>  fields = new ArrayList<>(
             Arrays.asList("title", "details", "favorite")
     );
 
     public Movie() {
         this.currentTable = TABLE_NAME;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public void create(){
@@ -43,8 +25,18 @@ public class Movie extends Database{
         this.insert("movies", this.fields, values);
     }
 
-//    public List<Object> search() {
-//        this.tableClass.where("id", "=", 2);
-//        return this.getAll();
-//    }
+    public void setDefaultFields() {
+        this.tableClass.setSelectFields("id, title, favorite");
+    }
+
+    public ResultSet allMovies () {
+        this.setDefaultFields();
+        return this.getResultQuery();
+    }
+
+    public ResultSet searchTitle(String text) {
+        this.setDefaultFields();
+        this.tableClass.setWhere("title", "LIKE", "'%" + text + "%'"); // no security yet. Will update when there is enough time.
+        return this.getResultQuery();
+    }
 }

@@ -59,11 +59,13 @@ abstract public class Database {
      * Return record from the database
      * @return ArrayList
      */
-    public ResultSet getAll() {
+    public ResultSet getResultQuery() {
+        System.out.println(this.tableClass.getWhere());
         try {
-            query = this.conn.prepareStatement("select * from " +
+            query = this.conn.prepareStatement("select " + this.tableClass.getSelect() +" from " +
                     this.currentTable + this.tableClass.getWhere());
             ResultSet result = query.executeQuery();
+            this.tableClass.resetWhere();
             return result;
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class App  extends JFrame {
     private JPanel panelMain;
@@ -20,10 +21,15 @@ public class App  extends JFrame {
 
     public App(String title) {
         super(title);
+        this.activateListeners();
+    }
+
+    public void activateListeners() {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(textSearchInput.getText());
+                ResultSet rs = movie.searchTitle(textSearchInput.getText());
+                guiDisplay.showResultInJTable(rs, tableResult);
             }
         });
     }
@@ -38,6 +44,6 @@ public class App  extends JFrame {
 
         panelMain.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));
 
-        this.guiDisplay.showResultInJTable(this.movie.getAll(), this.tableResult);
+        this.guiDisplay.showResultInJTable(this.movie.allMovies(), this.tableResult);
     }
 }
