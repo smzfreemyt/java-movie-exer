@@ -55,7 +55,12 @@ public class Table {
      * @return
      */
     public Table setWhere(String field, String operator, Object value) {
-        this.whereStr += field + " " + operator + " " + value;
+        String where = field + " " + operator + " " + value;
+        if (this.whereStr.isEmpty()) {
+            this.whereStr += where;
+        } else {
+            this.whereStr += " AND " + where;
+        }
         return this;
     }
 

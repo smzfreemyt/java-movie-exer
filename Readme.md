@@ -4,6 +4,8 @@
 
 Database:MySQL
 
+Schema added in root directory `movies.sql`
+
 **Note!**
 
 Please change the database settings in Database.java

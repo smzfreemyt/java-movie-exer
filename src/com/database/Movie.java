@@ -34,8 +34,11 @@ public class Movie extends Database{
         return this.getResultQuery();
     }
 
-    public ResultSet searchTitle(String text) {
+    public ResultSet searchTitle(String text, String fav) {
         this.setDefaultFields();
+        if (fav != null) {
+            this.tableClass.setWhere("favorite", "=", "'" + fav + "'");
+        }
         this.tableClass.setWhere("title", "LIKE", "'%" + text + "%'"); // no security yet. Will update when there is enough time.
         return this.getResultQuery();
     }
