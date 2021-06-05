@@ -59,31 +59,16 @@ abstract public class Database {
      * Return record from the database
      * @return ArrayList
      */
-    public ArrayList<Object> getAll() {
+    public ResultSet getAll() {
         try {
-            ArrayList<Object> resultList = new ArrayList<>();
             query = this.conn.prepareStatement("select * from " +
                     this.currentTable + this.tableClass.getWhere());
             ResultSet result = query.executeQuery();
-            ResultSetMetaData meta = result.getMetaData();
-            int totalColumn = meta.getColumnCount();
-            while(result.next()) {
-                ArrayList<Object> obj = new ArrayList<>();
-                for (int x = 1; x < totalColumn; x++) {
-                    obj.add(result.getObject(x));
-                }
-                resultList.add(obj);
-            }
-            result.close();
-            query.close();
-            return resultList;
+            return result;
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
         return null;
     }
 
-    public int countAll() {
-        return this.getAll().size();
-    }
 }

@@ -43,8 +43,8 @@ public class Movie extends Database{
         this.insert("movies", this.fields, values);
     }
 
-    public List<Object> search() {
-        this.tableClass.where("id", "=", 2);
-        return this.getAll();
-    }
+//    public List<Object> search() {
+//        this.tableClass.where("id", "=", 2);
+//        return this.getAll();
+//    }
 }

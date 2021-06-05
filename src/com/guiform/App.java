@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,29 +38,31 @@ public class App  extends JFrame {
         });
     }
 
-    public void start() {
+    public void start(){
         this.initialize();
-        this.populate();
+        this.populate(this.movie.getAll(), this.tableResult);
     }
 
-    public void populate() {
-        String[] headers = { "col1", "col2"};
-        String[] data = { "AA", "BB", "CC", "DD", "EE", "FF", "GG", "HH", "II", "JJ",
-                "KK", "LL", "MM", "NN", "OO", "PP", "QQ", "RR" };
-        DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(headers);
 
-        ArrayList<String> ar = new ArrayList<String>();
-        for (int i = 0; i < data.length; i++) {
-            ar.add(data[i]);
+    public void populate(ResultSet rs, JTable table){
+        try {
+            DefaultTableModel tableModel = new DefaultTableModel();
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                tableModel.addColumn(metaData.getColumnLabel(columnIndex));
+            }
+            Object[] row = new Object[columnCount];
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                tableModel.addRow(row);
+            }
+            table.setModel(tableModel);
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
         }
-
-        for (int i = 0; i < (ar.size() / 2); i++) {
-            model.addRow(new Object[] { String.valueOf(ar.get(2 * i)),
-                    String.valueOf(ar.get((2 * i) + 1)) });
-        }
-
-        tableResult.setModel(model);
     }
 
     public void initialize() {
