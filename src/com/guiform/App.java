@@ -1,6 +1,7 @@
 package com.guiform;
 
 import com.database.Movie;
+import javafx.scene.SnapshotParametersBuilder;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +21,7 @@ public class App  extends JFrame {
     private JTextField textSearchInput;
     private JLabel labelSearch;
     private JTabbedPane tabbedPane1;
-    private JTable tableMovieList;
+    private JTable tableResult;
 
     private Movie movie = new Movie();
 
@@ -40,16 +41,23 @@ public class App  extends JFrame {
     }
 
     public void populate() {
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"ID","Movie Title","Details"},0);
-        model.addRow(new Object[] {"wow", "this", "test"});
-        ArrayList<Object> obj = this.movie.getAll();
-        int total = obj.size();
-        for (int x=0; x < total; x ++) {
-            Object[] data = obj.toArray();
-            Object[] row = {data[0], data[1], data[2]};
-            model.addRow(row);
+        String[] headers = { "col1", "col2"};
+        String[] data = { "AA", "BB", "CC", "DD", "EE", "FF", "GG", "HH", "II", "JJ",
+                "KK", "LL", "MM", "NN", "OO", "PP", "QQ", "RR" };
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(headers);
+
+        ArrayList<String> ar = new ArrayList<String>();
+        for (int i = 0; i < data.length; i++) {
+            ar.add(data[i]);
         }
-        tableMovieList.setModel(model);
+
+        for (int i = 0; i < (ar.size() / 2); i++) {
+            model.addRow(new Object[] { String.valueOf(ar.get(2 * i)),
+                    String.valueOf(ar.get((2 * i) + 1)) });
+        }
+
+        tableResult.setModel(model);
     }
 
     public void initialize() {

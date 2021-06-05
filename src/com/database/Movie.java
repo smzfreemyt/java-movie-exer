@@ -1,9 +1,6 @@
 package com.database;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Samuel Amador
@@ -11,6 +8,8 @@ import java.util.Map;
 public class Movie extends Database{
 
     protected final String TABLE_NAME = "movies";
+    private int id;
+    private String title;
 
     private final ArrayList<String>  fields = new ArrayList<>(
             Arrays.asList("title", "details", "favorite")
@@ -18,6 +17,22 @@ public class Movie extends Database{
 
     public Movie() {
         this.currentTable = TABLE_NAME;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void create(){
@@ -28,7 +43,7 @@ public class Movie extends Database{
         this.insert("movies", this.fields, values);
     }
 
-    public ArrayList<Object> search() {
+    public List<Object> search() {
         this.tableClass.where("id", "=", 2);
         return this.getAll();
     }
