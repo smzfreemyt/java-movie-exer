@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 
 public class App  extends JFrame {
@@ -13,9 +15,10 @@ public class App  extends JFrame {
     private JButton submitButton;
     private JTextField textSearchInput;
     private JLabel labelSearch;
-    private JTabbedPane tabbedPane1;
     private JTable tableResult;
     private JComboBox comboFavorite;
+    private JLabel labelDetails;
+    private JButton buttonInsert;
 
     private Movie movie = new Movie();
     private GuiDisplay guiDisplay = new GuiDisplay();
@@ -26,6 +29,15 @@ public class App  extends JFrame {
     }
 
     public void activateListeners() {
+        buttonInsert.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                movie.create();
+                JOptionPane.showMessageDialog(null, "Successfully added Automatically!");
+                ResultSet rs = movie.searchTitle(textSearchInput.getText(), null);
+                guiDisplay.showResultInJTable(rs, tableResult);
+            }
+        });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,6 +50,27 @@ public class App  extends JFrame {
                 guiDisplay.showResultInJTable(rs, tableResult);
             }
         });
+
+        tableResult.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try {
+                    int row = tableResult.getSelectedRow();
+                    Object id = tableResult.getModel().getValueAt(row, 0);
+                    ResultSet rs = movie.findMovie((Integer) id);
+                    if (rs.next()) {
+                        panelMain.setLayout(null);
+                        Dimension size = labelDetails.getPreferredSize();
+                        labelDetails.setBounds(100, 100, 400, 400);
+                        labelDetails.setText(rs.getString(3));
+                    }
+                } catch (Exception error) {
+                    System.out.println("Error" + error.getMessage());
+                }
+            }
+        });
+
     }
 
     public void start() {

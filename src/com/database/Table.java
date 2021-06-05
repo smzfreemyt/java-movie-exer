@@ -64,8 +64,9 @@ public class Table {
         return this;
     }
 
-    public void resetWhere() {
+    public void resetCustomQuery() {
         this.whereStr = "";
+        this.selectFields = "";
     }
 
     public String getWhere() {
