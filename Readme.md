@@ -10,5 +10,11 @@ Schema added in root directory `movies.sql`
 
 Please change the database settings in Database.java
 
+# Demo
+
+Link: <a href="https://i.imgur.com/K2pe71R.gif">https://i.imgur.com/K2pe71R.gif</a>
+
+<img src="https://i.imgur.com/K2pe71R.gif"/>
+
 
 God bless,
