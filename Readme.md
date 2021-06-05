@@ -12,9 +12,9 @@ Please change the database settings in Database.java
 
 # Demo
 
-Link: <a href="https://i.imgur.com/K2pe71R.gif">https://i.imgur.com/K2pe71R.gif</a>
+Link: <a href="https://i.imgur.com/6IlxcfU.gif">https://i.imgur.com/6IlxcfU.gif</a>
 
-<img src="https://i.imgur.com/K2pe71R.gif"/>
+<img src="https://i.imgur.com/6IlxcfU.gif"/>
 
 
 God bless,
