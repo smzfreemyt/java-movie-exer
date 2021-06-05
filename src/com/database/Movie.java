@@ -58,4 +58,8 @@ public class Movie extends Database{
         this.tableClass.setWhere("id", "=", id);
         return this.getResultQuery();
     }
+
+    public void addToFavorite(int id) {
+        this.updateQuery("favorite='Yes'", id);
+    }
 }

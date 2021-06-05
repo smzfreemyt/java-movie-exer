@@ -19,9 +19,13 @@ public class App  extends JFrame {
     private JComboBox comboFavorite;
     private JLabel labelDetails;
     private JButton buttonInsert;
+    private JButton buttonFavorite;
 
     private Movie movie = new Movie();
     private GuiDisplay guiDisplay = new GuiDisplay();
+
+    private int selectedId;
+
 
     public App(String title) {
         super(title);
@@ -29,6 +33,15 @@ public class App  extends JFrame {
     }
 
     public void activateListeners() {
+        buttonFavorite.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                movie.addToFavorite(selectedId);
+                JOptionPane.showMessageDialog(null, "Added to favorite!");
+                ResultSet rs = movie.searchTitle(textSearchInput.getText(), null);
+                guiDisplay.showResultInJTable(rs, tableResult);
+            }
+        });
         buttonInsert.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,6 +77,15 @@ public class App  extends JFrame {
                         Dimension size = labelDetails.getPreferredSize();
                         labelDetails.setBounds(100, 100, 400, 400);
                         labelDetails.setText(rs.getString(3));
+                        String isFav = rs.getString(4);
+                        selectedId = rs.getInt(1);
+                        System.out.println(selectedId);
+                        if (isFav.equals("No")) {
+                            buttonFavorite.setText("Add to Favorite");
+                            buttonFavorite.setVisible(true);
+                        } else {
+                            buttonFavorite.setVisible(false);
+                        }
                     }
                 } catch (Exception error) {
                     System.out.println("Error" + error.getMessage());
@@ -88,6 +110,8 @@ public class App  extends JFrame {
         comboFavorite.addItem("All");
         comboFavorite.addItem("Yes");
         comboFavorite.addItem("No");
+
+        buttonFavorite.setVisible(false);
 
         // initialize JTable display
         this.guiDisplay.showResultInJTable(this.movie.allMovies(), this.tableResult);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2021 at 04:32 PM
+-- Generation Time: Jun 05, 2021 at 05:09 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -41,13 +41,15 @@ CREATE TABLE `movies` (
 INSERT INTO `movies` (`id`, `title`, `details`, `favorite`) VALUES
 (1, 'Flame of Eugene', 'The series was adapted into a 42-episode anime television series by Pierrot, broadcast on Fuji TV.', 'Yes'),
 (2, 'Tom and Bugs bunny', 'Tom and Jerry is an American animated media franchise and series of comedy short films.', 'No'),
-(3, 'Ghost of Recca', 'YuYu Hakusho is a Japanese manga series written and illustrated.', 'Yes'),
-(4, 'Malaala mo kaya', 'From March 14, 2020, the production of the program\'s new episodes were suspended.', 'No'),
-(5, '24 Oras', '24 Oras (pronounced as bente kwatro oras / transl. 24 Hours) is a Philippine television news broadcasting show.', 'Yes'),
+(3, 'Ghost of Recca', 'YuYu Hakusho is a Japanese manga series written and illustrated.', 'No'),
+(4, 'Malaala mo kaya', 'From March 14, 2020, the production of the program\'s new episodes were suspended.', 'Yes'),
+(5, '24 Oras', '24 Oras (pronounced as bente kwatro oras / transl. 24 Hours) is a Philippine television news broadcasting show.', 'No'),
 (6, 'Automatic Movie title', 'Automatic details added', 'Yes'),
-(7, 'More Added title', 'More details automatic', 'Yes'),
+(7, 'More Added title', 'More details automatic', 'No'),
 (8, 'Ang TV na', 'Woww!!', 'Yes'),
-(9, 'The Lion King', 'Come and see new detail', 'Yes');
+(9, 'The Lion King', 'Come and see new detail', 'Yes'),
+(10, 'Automatic Movie title', 'What did you add?', 'No'),
+(11, 'The Lion King', 'Automatic details added', 'Yes');
 
 --
 -- Indexes for dumped tables
@@ -67,7 +69,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

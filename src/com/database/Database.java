@@ -73,4 +73,14 @@ abstract public class Database {
         return null;
     }
 
+    public void updateQuery(String data, int id) {
+        try {
+            query = this.conn.prepareStatement("Update " + this.currentTable + " SET " +
+                                                    data + " WHERE id=" + id);
+            query.execute();
+            query.close();
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+    }
 }
