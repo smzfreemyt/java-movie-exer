@@ -7,10 +7,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class App  extends JFrame {
     private JButton submitButton;
@@ -43,8 +45,9 @@ public class App  extends JFrame {
         ArrayList<Object> obj = this.movie.getAll();
         int total = obj.size();
         for (int x=0; x < total; x ++) {
-            Object data = obj.get(x);
-            model.addRow(new Object[]{data});
+            Object[] data = obj.toArray();
+            Object[] row = {data[0], data[1], data[2]};
+            model.addRow(row);
         }
         tableMovieList.setModel(model);
     }
