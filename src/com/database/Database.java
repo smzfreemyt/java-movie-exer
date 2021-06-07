@@ -60,10 +60,12 @@ abstract public class Database {
      * @return ArrayList
      */
     public ResultSet getResultQuery() {
-        System.out.println(this.tableClass.getSelect() + this.tableClass.getWhere());
         try {
-            query = this.conn.prepareStatement("select " + this.tableClass.getSelect() +" from " +
-                    this.currentTable + this.tableClass.getWhere());
+            String select = "select " + this.tableClass.getSelect() +" from ";
+            String table = select.concat(this.currentTable);
+            String sql   = table.concat(this.tableClass.getWhere());
+            System.out.println(sql);
+            query = this.conn.prepareStatement(sql);
             ResultSet result = query.executeQuery();
             this.tableClass.resetCustomQuery();
             return result;
