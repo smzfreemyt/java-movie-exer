@@ -79,14 +79,19 @@ abstract public class Database {
         return null;
     }
 
-    public void updateQuery(String data, int id) {
+    public void updateQuery(String data, int id) throws SQLException {
         try {
             String sql = "Update " + this.currentTable + " SET " + data + " WHERE id=" + id;
+            this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement(sql);
             query.execute();
             query.close();
-        } catch (Exception e) {
+            this.conn.commit();
+        } catch (SQLException e) {
             System.out.println("Error : " + e.getMessage());
+            if (this.conn != null) {
+                this.conn.rollback();
+            }
         }
     }
 

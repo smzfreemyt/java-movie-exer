@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class App  extends JFrame {
     private JPanel panelMain;
-    private JButton submitButton;
+    private JButton searchButton;
     private JTextField textSearchInput;
     private JLabel lblSearch;
     private JTable tableResult;
@@ -20,6 +20,7 @@ public class App  extends JFrame {
     private JTextField textFavorite;
     private JButton addUserButton;
 
+    private ResultSet rs;
     private GuiDisplay guiDisplay = new GuiDisplay();
     private User user = new User();
 
@@ -31,6 +32,23 @@ public class App  extends JFrame {
     }
 
     public void performListener() {
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String input = textSearchInput.getText();
+                    if (!input.isEmpty()) {
+                        rs = user.findByUsername(input);
+                    } else {
+                        rs = user.allUsers();
+                    }
+                    guiDisplay.showResultInJTable(rs, tableResult);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
         addUserButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {

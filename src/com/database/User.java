@@ -45,4 +45,10 @@ public class User extends Database{
         this.tableClass.setWhere("id", "=", id);
         return this.getResultQuery();
     }
+
+    public ResultSet findByUsername(String input) throws  SQLException {
+        this.tableClass.setSelectFields("id, username, password, favorite_number");
+        this.tableClass.setWhere("username", "=", "'" + input + "'");
+        return this.getResultQuery();
+    }
 }
