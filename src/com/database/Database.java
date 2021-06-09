@@ -38,8 +38,7 @@ abstract public class Database {
      * @param fields
      * @param values
      */
-    public void insert(String table, ArrayList<String> fields, Map<Integer, Object> values)
-    {
+    public void insert(String table, ArrayList<String> fields, Map<Integer, Object> values) throws SQLException {
         try {
             Table tbl = new Table(fields, values);
             query = this.conn.prepareStatement("INSERT INTO " + table +
@@ -50,8 +49,13 @@ abstract public class Database {
             }
             query.execute();
             System.out.println("Inserted Successfully");
-        } catch (Exception e) {
-            System.out.println("Error Insert : " + e);
+        } catch (SQLException e) {
+            if (this.conn != null) {
+                this.conn.rollback();
+            }
+            System.out.println("Error Insert : " + e.getMessage());
+        } finally {
+            if (this.conn != null) { this.conn.close(); }
         }
     }
 
@@ -59,7 +63,7 @@ abstract public class Database {
      * Return record from the database
      * @return ArrayList
      */
-    public ResultSet getResultQuery() {
+    public ResultSet getResultQuery() throws SQLException {
         try {
             String select = "select " + this.tableClass.getSelect() +" from ";
             String table = select.concat(this.currentTable);
@@ -69,20 +73,30 @@ abstract public class Database {
             ResultSet result = query.executeQuery();
             this.tableClass.resetCustomQuery();
             return result;
-        } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error : " + e);
+            if (this.conn != null) {
+                this.conn.rollback();
+            }
+            throw new SQLException("Error: " + e.getMessage());
+        } finally {
+            if (this.conn != null) { this.conn.close(); }
         }
-        return null;
     }
 
-    public void updateQuery(String data, int id) {
+    public void updateQuery(String data, int id) throws SQLException {
         try {
             String sql = "Update " + this.currentTable + " SET " + data + " WHERE id=" + id;
             query = this.conn.prepareStatement(sql);
             query.execute();
             query.close();
-        } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+        } catch (SQLException e) {
+            if (this.conn != null) {
+                this.conn.rollback();
+            }
+            throw new SQLException("Error: " + e.getMessage());
+        } finally {
+            if (this.conn != null) { this.conn.close(); }
         }
     }
 }

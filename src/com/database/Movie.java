@@ -1,6 +1,7 @@
 package com.database;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -39,12 +40,12 @@ public class Movie extends Database{
         this.tableClass.setSelectFields("id, title, favorite");
     }
 
-    public ResultSet allMovies () {
+    public ResultSet allMovies () throws SQLException {
         this.setDefaultFields();
         return this.getResultQuery();
     }
 
-    public ResultSet searchTitle(String text, String fav) {
+    public ResultSet searchTitle(String text, String fav) throws SQLException {
         this.setDefaultFields();
         if (fav != null) {
             this.tableClass.setWhere("favorite", "=", "'" + fav + "'");
@@ -53,13 +54,13 @@ public class Movie extends Database{
         return this.getResultQuery();
     }
 
-    public ResultSet findMovie(int id) {
+    public ResultSet findMovie(int id) throws SQLException {
         this.tableClass.setSelectFields("id, title, details, favorite");
         this.tableClass.setWhere("id", "=", id);
         return this.getResultQuery();
     }
 
-    public void addToFavorite(int id) {
+    public void addToFavorite(int id) throws  SQLException{
         this.updateQuery("favorite='Yes'", id);
     }
 }
