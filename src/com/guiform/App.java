@@ -73,6 +73,12 @@ public class App  extends JFrame {
                     ResultSet rs = user.findUser((Integer) id);
                     if (rs.next()) {
                         selectedId = rs.getInt(1);
+                        new ModalEntry(selectedId);
+                    }
+
+                   /* ResultSet rs = user.findUser((Integer) id);
+                    if (rs.next()) {
+                        selectedId = rs.getInt(1);
                         int dialogButton = JOptionPane.YES_NO_OPTION;
                         int dialogResult = JOptionPane.showConfirmDialog(null, "Delete id #" + selectedId + "?", "Title on Box", dialogButton);
                         if(dialogResult == 0) {
@@ -80,7 +86,7 @@ public class App  extends JFrame {
                             JOptionPane.showMessageDialog(null, "Deleted successfully");
                             guiDisplay.showResultInJTable(user.allUsers(), tableResult);
                         }
-                    }
+                    }*/
                 } catch (Exception err) {
                     System.out.println("Error: " + err.getMessage());
                 }
