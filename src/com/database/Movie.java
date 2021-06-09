@@ -61,7 +61,7 @@ public class Movie extends Database{
         return this.getResultQuery();
     }
 
-    public void addToFavorite(int id) throws  SQLException{
-        this.updateQuery("favorite='Yes'", id);
-    }
+//    public void addToFavorite(int id) throws  SQLException{
+//        this.updateQuery("favorite='Yes'", id);
+//    }
 }

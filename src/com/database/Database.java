@@ -2,6 +2,7 @@ package com.database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -79,13 +80,31 @@ abstract public class Database {
         return null;
     }
 
-    public void updateQuery(String data, int id) throws SQLException {
+    /**
+     * Dynamic Update of records
+     * @param fieldSet
+     * @param id
+     * @throws SQLException
+     */
+    public void updateQuery(Map<String, Object> fieldSet, int id) throws SQLException {
         try {
-            String sql = "Update " + this.currentTable + " SET " + data + " WHERE id=" + id;
+            StringBuilder data = new StringBuilder();
+            for (Map.Entry<String, Object> stringObjectEntry : fieldSet.entrySet()) {
+                String[] exp = stringObjectEntry.toString().split("=");
+                data.append(exp[0]).append("=?,");
+            }
+            String dataSubstr = data.substring(0, data.length() - 1);
+            String sql = "Update " + this.currentTable + " SET " + dataSubstr + " WHERE id=?";
             this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement(sql);
+            int ctr = 1;
+            for (Map.Entry<String, Object> stringObjectEntry : fieldSet.entrySet()) {
+                String[] expData = stringObjectEntry.toString().split("=");
+                query.setObject(ctr, expData[1]);
+                ctr++;
+            }
+            query.setInt(ctr, id);
             query.execute();
-            query.close();
             this.conn.commit();
         } catch (SQLException e) {
             System.out.println("Error : " + e.getMessage());
@@ -97,8 +116,9 @@ abstract public class Database {
 
     public void delete(int id) {
         try {
-            String sql = "Delete from " + this.currentTable + " where id=" + id;
+            String sql = "Delete from " + this.currentTable + " where id=?";
             query = this.conn.prepareStatement(sql);
+            query.setInt(1, id);
             query.execute();
             query.close();
         } catch (Exception e) {

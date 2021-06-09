@@ -26,8 +26,8 @@ public class App  extends JFrame {
 
     private int selectedId;
 
-    public App(String title) {
-        super(title);
+    public App() {
+        super("JDBC Exercise By Samuel");
         this.performListener();
     }
 
@@ -72,10 +72,8 @@ public class App  extends JFrame {
                     Object id = tableResult.getModel().getValueAt(row, 0);
                     ResultSet rs = user.findUser((Integer) id);
                     if (rs.next()) {
-                        selectedId = rs.getInt(1);
-                        new ModalEntry(selectedId);
+                        new ModalEntry(rs);
                     }
-
                    /* ResultSet rs = user.findUser((Integer) id);
                     if (rs.next()) {
                         selectedId = rs.getInt(1);
@@ -106,6 +104,10 @@ public class App  extends JFrame {
         panelMain.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));
 
         // initialize JTable display
+        this.displayTableResults();
+    }
+
+    public void displayTableResults() throws SQLException {
         this.guiDisplay.showResultInJTable(this.user.allUsers(), this.tableResult);
     }
 }

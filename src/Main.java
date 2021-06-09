@@ -14,11 +14,8 @@ import java.util.Map;
  * @author Samuel Amador
  */
 public class Main {
-    private static  final ArrayList<String> fields = new ArrayList<>(
-            Arrays.asList("username", "password", "favorite_number")
-    );
     public static void main(String[] args) throws SQLException {
-        App app = new App("JDBC Exercise by Samuel");
+        App app = new App();
         app.start();
     }
 }
