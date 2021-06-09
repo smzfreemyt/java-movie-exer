@@ -10,7 +10,8 @@ Schema added in root directory `exerdb.txt`
 
 Please change the database settings in Database.java
 
-Link: <a href="https://i.imgur.com/EzHBm0Q.gif>https://i.imgur.com/EzHBm0Q.gif</a>
+# Demo
+
+Link: <a href="https://i.imgur.com/EzHBm0Q.gif">https://i.imgur.com/EzHBm0Q.gif</a>
 
 <img src="https://i.imgur.com/EzHBm0Q.gif/>
-# Demo
