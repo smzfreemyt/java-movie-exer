@@ -1,0 +1,19 @@
+CREATE TABLE `users` (
+  `id` int(12) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `favorite_number` int(11) NOT NULL
+);
+
+INSERT INTO `users` (`id`, `username`, `password`, `favorite_number`) VALUES
+(9, 'smzapp', 'test', 800),
+(13, 'sample', 'ba daw', 100),
+(19, 'counter', 'test', 102),
+(20, 'sam', 'pass', 405);
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `users`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+COMMIT;

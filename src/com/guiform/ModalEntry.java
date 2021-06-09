@@ -26,11 +26,14 @@ public class ModalEntry extends JFrame {
 
     private ResultSet rsData;
 
-    public ModalEntry (ResultSet rs) throws SQLException {
+    public ModalEntry (){
+        this.performActions();
+    }
+
+    public void setRecordSet(ResultSet rs)  throws SQLException{
         this.rsData = rs;
         this.initialize();
         this.populate();
-        this.performActions();
     }
 
     public void performActions() {

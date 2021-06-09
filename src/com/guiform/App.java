@@ -71,7 +71,8 @@ public class App  extends JFrame {
                     Object id = tableResult.getModel().getValueAt(row, 0);
                     ResultSet rs = user.findUser((Integer) id);
                     if (rs.next()) {
-                        new ModalEntry(rs);
+                        ModalEntry modal = new ModalEntry();
+                        modal.setRecordSet(rs);
                     }
                 } catch (Exception err) {
                     System.out.println("Error: " + err.getMessage());

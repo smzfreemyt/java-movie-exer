@@ -70,16 +70,17 @@ abstract public class Database {
             String table = select.concat(this.currentTable);
             String sql   = table.concat(this.tableClass.getWhere());
             System.out.println(sql);
+            this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement(sql);
             Object[] values = this.tableClass.getWhereValues();
             if (values != null) {
                 for (int x=1; x <= values.length; x++) {
-                    System.out.println(values[x - 1]);
                     query.setObject(x, values[x - 1]);
                 }
             }
             ResultSet result = query.executeQuery();
             this.tableClass.resetCustomQuery();
+            this.conn.commit();
             return result;
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
@@ -127,7 +128,6 @@ abstract public class Database {
             query = this.conn.prepareStatement(sql);
             query.setInt(1, id);
             query.execute();
-            query.close();
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
