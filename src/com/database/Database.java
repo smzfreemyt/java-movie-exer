@@ -77,8 +77,8 @@ abstract public class Database {
 
     public void updateQuery(String data, int id) {
         try {
-            query = this.conn.prepareStatement("Update " + this.currentTable + " SET " +
-                                                    data + " WHERE id=" + id);
+            String sql = "Update " + this.currentTable + " SET " + data + " WHERE id=" + id;
+            query = this.conn.prepareStatement(sql);
             query.execute();
             query.close();
         } catch (Exception e) {
