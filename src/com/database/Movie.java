@@ -30,9 +30,10 @@ public class Movie extends Database{
             values.put(1, autoTitle[ctrTitle]);
             values.put(2, autoDetail[ctrDetail]);
             values.put(3, "Yes");
+            System.out.println("movie??");
             this.insert("movies", this.fields, values);
         } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+            System.out.println("Error Movie create: " + e.getMessage());
         }
     }
 

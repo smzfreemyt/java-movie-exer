@@ -30,6 +30,23 @@ public class App  extends JFrame {
 
     public App(String title) {
         super(title);
+        this.performListener();
+    }
+
+    public void performListener() {
+        addUserButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object[] data = {textUsername.getText(), textPassword.getText(), textFavorite.getText()};
+                user.create(data);
+                JOptionPane.showMessageDialog(null, "Successfully added!");
+                try {
+                    guiDisplay.showResultInJTable(user.allUsers(), tableResult);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
     }
 
     public void start() throws SQLException {

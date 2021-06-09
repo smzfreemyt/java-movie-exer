@@ -65,7 +65,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="Test username"/>
+        </properties>
       </component>
       <component id="a56a5" class="javax.swing.JTextField" binding="textPassword">
         <constraints>
@@ -73,7 +75,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="Test"/>
+        </properties>
       </component>
       <component id="b55f6" class="javax.swing.JTextField" binding="textFavorite">
         <constraints>
@@ -81,7 +85,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="70"/>
+        </properties>
       </component>
       <component id="11571" class="javax.swing.JButton" binding="addUserButton" default-binding="true">
         <constraints>
