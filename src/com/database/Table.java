@@ -14,6 +14,7 @@ public class Table {
     private Map<Integer, Object> values;
     private String name = "";
     private String whereStr = "";
+    private Object[] whereValues;
     private String selectFields = "";
 
     /**
@@ -51,22 +52,27 @@ public class Table {
     }
 
     /**
-     * Can do where chaining. No security added YET. Will do later when there is time.
+     * Format: field=?,field=?
      * @return
      */
     public Table setWhere(String field, String operator, Object value) {
-        String where = field + " " + operator + " " + value;
-        if (this.whereStr.isEmpty()) {
-            this.whereStr += where;
-        } else {
-            this.whereStr += " AND " + where;
+        String where = field + " " + operator + "?";
+        if (! this.whereStr.isEmpty()) {
+            where += " AND " + where;
         }
+        this.whereValues = new Object[] {value};
+        this.whereStr = where;
         return this;
     }
 
     public void resetCustomQuery() {
         this.whereStr = "";
         this.selectFields = "";
+        this.whereValues = null;
+    }
+
+    public Object[] getWhereValues() {
+        return this.whereValues;
     }
 
     public String getWhere() {

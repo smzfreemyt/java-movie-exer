@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * June 4, 2021
+ * I am still new to Java so please bare with me... :D
  * @author Samuel Amador
  */
 abstract public class Database {
@@ -71,6 +71,13 @@ abstract public class Database {
             String sql   = table.concat(this.tableClass.getWhere());
             System.out.println(sql);
             query = this.conn.prepareStatement(sql);
+            Object[] values = this.tableClass.getWhereValues();
+            if (values != null) {
+                for (int x=1; x <= values.length; x++) {
+                    System.out.println(values[x - 1]);
+                    query.setObject(x, values[x - 1]);
+                }
+            }
             ResultSet result = query.executeQuery();
             this.tableClass.resetCustomQuery();
             return result;

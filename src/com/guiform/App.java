@@ -1,6 +1,5 @@
 package com.guiform;
 
-import com.database.Movie;
 import com.database.User;
 
 import javax.swing.*;
@@ -74,17 +73,6 @@ public class App  extends JFrame {
                     if (rs.next()) {
                         new ModalEntry(rs);
                     }
-                   /* ResultSet rs = user.findUser((Integer) id);
-                    if (rs.next()) {
-                        selectedId = rs.getInt(1);
-                        int dialogButton = JOptionPane.YES_NO_OPTION;
-                        int dialogResult = JOptionPane.showConfirmDialog(null, "Delete id #" + selectedId + "?", "Title on Box", dialogButton);
-                        if(dialogResult == 0) {
-                            user.delete(selectedId);
-                            JOptionPane.showMessageDialog(null, "Deleted successfully");
-                            guiDisplay.showResultInJTable(user.allUsers(), tableResult);
-                        }
-                    }*/
                 } catch (Exception err) {
                     System.out.println("Error: " + err.getMessage());
                 }
