@@ -1,6 +1,7 @@
 package com.guiform;
 
 import com.database.Movie;
+import com.database.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,12 +18,15 @@ public class App  extends JFrame {
     private JTextField textSearchInput;
     private JLabel lblSearch;
     private JTable tableResult;
+    private JTextField textUsername;
+    private JTextField textPassword;
+    private JTextField textFavorite;
+    private JButton addUserButton;
 
-    private Movie movie = new Movie();
     private GuiDisplay guiDisplay = new GuiDisplay();
+    private User user = new User();
 
     private int selectedId;
-
 
     public App(String title) {
         super(title);
@@ -40,6 +44,6 @@ public class App  extends JFrame {
         panelMain.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));
 
         // initialize JTable display
-        this.guiDisplay.showResultInJTable(this.movie.allMovies(), this.tableResult);
+        this.guiDisplay.showResultInJTable(this.user.allUsers(), this.tableResult);
     }
 }

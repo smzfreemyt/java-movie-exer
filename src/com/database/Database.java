@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * June 4, 2021
  * @author Samuel Amador
  */
 abstract public class Database {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_NAME = "moviedb";
+    private static final String DB_NAME = "jdbcexerdb";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
     private static final String DB_CONN = "jdbc:mysql://localhost:3306/" + DB_NAME;
@@ -41,6 +40,7 @@ abstract public class Database {
     public void insert(String table, ArrayList<String> fields, Map<Integer, Object> values) throws SQLException {
         try {
             Table tbl = new Table(fields, values);
+            this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement("INSERT INTO " + table +
                     "("+ tbl.getFields() + ")" +
                     "VALUES(" + tbl.getValuesUnknown() + ")");
@@ -54,8 +54,6 @@ abstract public class Database {
                 this.conn.rollback();
             }
             System.out.println("Error Insert : " + e.getMessage());
-        } finally {
-            if (this.conn != null) { this.conn.close(); }
         }
     }
 
@@ -69,6 +67,7 @@ abstract public class Database {
             String table = select.concat(this.currentTable);
             String sql   = table.concat(this.tableClass.getWhere());
             System.out.println(sql);
+            this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement(sql);
             ResultSet result = query.executeQuery();
             this.tableClass.resetCustomQuery();
@@ -79,14 +78,13 @@ abstract public class Database {
                 this.conn.rollback();
             }
             throw new SQLException("Error: " + e.getMessage());
-        } finally {
-            if (this.conn != null) { this.conn.close(); }
         }
     }
 
     public void updateQuery(String data, int id) throws SQLException {
         try {
             String sql = "Update " + this.currentTable + " SET " + data + " WHERE id=" + id;
+            this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement(sql);
             query.execute();
             query.close();
