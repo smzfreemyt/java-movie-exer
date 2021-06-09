@@ -44,6 +44,30 @@ public class App  extends JFrame {
                 }
             }
         });
+
+        tableResult.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try {
+                    int row = tableResult.getSelectedRow();
+                    Object id = tableResult.getModel().getValueAt(row, 0);
+                    ResultSet rs = user.findUser((Integer) id);
+                    if (rs.next()) {
+                        selectedId = rs.getInt(1);
+                        int dialogButton = JOptionPane.YES_NO_OPTION;
+                        int dialogResult = JOptionPane.showConfirmDialog(null, "Delete id #" + selectedId + "?", "Title on Box", dialogButton);
+                        if(dialogResult == 0) {
+                            user.delete(selectedId);
+                            JOptionPane.showMessageDialog(null, "Deleted successfully");
+                            guiDisplay.showResultInJTable(user.allUsers(), tableResult);
+                        }
+                    }
+                } catch (Exception err) {
+                    System.out.println("Error: " + err.getMessage());
+                }
+            }
+        });
     }
 
     public void start() throws SQLException {

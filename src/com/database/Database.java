@@ -89,4 +89,15 @@ abstract public class Database {
             System.out.println("Error : " + e.getMessage());
         }
     }
+
+    public void delete(int id) {
+        try {
+            String sql = "Delete from " + this.currentTable + " where id=" + id;
+            query = this.conn.prepareStatement(sql);
+            query.execute();
+            query.close();
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+    }
 }
