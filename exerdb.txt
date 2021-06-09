@@ -7,7 +7,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `favorite_number`) VALUES
 (9, 'smzapp', 'test', 800),
-(13, 'sample', 'ba daw', 100),
+(13, 'sample', 'test', 100),
 (19, 'counter', 'test', 102),
 (20, 'sam', 'pass', 405);
 

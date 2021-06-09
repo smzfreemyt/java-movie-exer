@@ -64,7 +64,7 @@ abstract public class Database {
      * Return record from the database
      * @return ArrayList
      */
-    public ResultSet getResultQuery() {
+    public ResultSet getResultQuery() throws SQLException {
         try {
             String select = "select " + this.tableClass.getSelect() +" from ";
             String table = select.concat(this.currentTable);
@@ -83,7 +83,9 @@ abstract public class Database {
             this.conn.commit();
             return result;
         } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+            if(this.conn != null) {
+                this.conn.rollback();
+            }
         }
         return null;
     }
