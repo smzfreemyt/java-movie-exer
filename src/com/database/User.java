@@ -33,10 +33,16 @@ public class User extends Database{
             Map<Integer, Object> values = new HashMap<>();
             values.put(1, data[0]);
             values.put(2, data[1]);
-            values.put(3, 3);
+            values.put(3, data[2]);
             this.insert(TABLE_NAME, this.fields, values);
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
+    }
+
+    public ResultSet findUser(int id) throws SQLException {
+        this.tableClass.setSelectFields("id, username, password, favorite_number");
+        this.tableClass.setWhere("id", "=", id);
+        return this.getResultQuery();
     }
 }

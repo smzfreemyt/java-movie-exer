@@ -66,7 +66,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Test username"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="a56a5" class="javax.swing.JTextField" binding="textPassword">
@@ -76,7 +76,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Test"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="b55f6" class="javax.swing.JTextField" binding="textFavorite">
@@ -86,7 +86,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="70"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="11571" class="javax.swing.JButton" binding="addUserButton" default-binding="true">

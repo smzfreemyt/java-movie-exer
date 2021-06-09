@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
+ * June 4, 2021
  * @author Samuel Amador
  */
 abstract public class Database {
@@ -48,6 +49,7 @@ abstract public class Database {
                 query.setObject(i, values.get(i));
             }
             query.execute();
+            this.conn.commit(); //execute
             System.out.println("Inserted Successfully");
         } catch (SQLException e) {
             if (this.conn != null) {
@@ -61,40 +63,30 @@ abstract public class Database {
      * Return record from the database
      * @return ArrayList
      */
-    public ResultSet getResultQuery() throws SQLException {
+    public ResultSet getResultQuery() {
         try {
             String select = "select " + this.tableClass.getSelect() +" from ";
             String table = select.concat(this.currentTable);
             String sql   = table.concat(this.tableClass.getWhere());
             System.out.println(sql);
-            this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement(sql);
             ResultSet result = query.executeQuery();
             this.tableClass.resetCustomQuery();
             return result;
-        } catch (SQLException e) {
-            System.out.println("Error : " + e);
-            if (this.conn != null) {
-                this.conn.rollback();
-            }
-            throw new SQLException("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
         }
+        return null;
     }
 
-    public void updateQuery(String data, int id) throws SQLException {
+    public void updateQuery(String data, int id) {
         try {
             String sql = "Update " + this.currentTable + " SET " + data + " WHERE id=" + id;
-            this.conn.setAutoCommit(false);
             query = this.conn.prepareStatement(sql);
             query.execute();
             query.close();
-        } catch (SQLException e) {
-            if (this.conn != null) {
-                this.conn.rollback();
-            }
-            throw new SQLException("Error: " + e.getMessage());
-        } finally {
-            if (this.conn != null) { this.conn.close(); }
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
         }
     }
 }

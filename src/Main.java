@@ -18,15 +18,7 @@ public class Main {
             Arrays.asList("username", "password", "favorite_number")
     );
     public static void main(String[] args) throws SQLException {
-//        App app = new App("JDBC Exercise by Samuel");
-//        app.start();
-
-//        Map<Integer, Object> values = new HashMap<>();
-//        values.put(1, "fourth");
-//        values.put(2, "second");
-//        values.put(3, 3);
-        System.out.println("main movie");
-        Movie movie = new Movie();
-        movie.create();
+        App app = new App("JDBC Exercise by Samuel");
+        app.start();
     }
 }
